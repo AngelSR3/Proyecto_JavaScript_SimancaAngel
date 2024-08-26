@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Progress</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Track Your Progress</h1>
+        
+        <form id="form" class="form">
+            <div class="form-group">
+                <label for="name">Nombre del Recurso</label>
+                <input type="text" id="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="title">Género:</label>
+                <div class="select-circles">
+                    <input type="checkbox" id="accion" name="genero" value="Accion">
+                    <label for="accion">Acción</label>
+                    
+                    <input type="checkbox" id="aventura" name="genero" value="Aventura">
+                    <label for="aventura">Aventura</label>
+                    
+                    <input type="checkbox" id="comedia" name="genero" value="Comedia">
+                    <label for="comedia">Comedia</label>
+                    
+                    <input type="checkbox" id="terror" name="genero" value="Terror">
+                    <label for="terror">Terror</label>
+                    
+                    <input type="checkbox" id="ficcion" name="genero" value="Ficcion">
+                    <label for="ficcion">Ficción</label>
+                    
+                    <input type="checkbox" id="drama" name="genero" value="Drama">
+                    <label for="drama">Drama</label>
+                    
+                    <input type="checkbox" id="thriller" name="genero" value="Thriller">
+                    <label for="thriller">Thriller</label>
+                    
+                    <input type="checkbox" id="otro" name="genero" value="Otro">
+                    <label for="otro">Otro</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="title">Plataforma:</label>
+                <div class="select-circles">
+                    <input type="checkbox" id="netflix" name="plataforma" value="Netflix">
+                    <label for="netflix">Netflix</label>
+                    
+                    <input type="checkbox" id="hbo" name="plataforma" value="HBO">
+                    <label for="hbo">HBO</label>
+                    
+                    <input type="checkbox" id="amazon" name="plataforma" value="Amazon">
+                    <label for="amazon">Amazon</label>
+                    
+                    <input type="checkbox" id="otra" name="plataforma" value="Otra">
+                    <label for="otra">Otra</label>
+                    
+                    <input type="checkbox" id="no" name="plataforma" value="No">
+                    <label for="no">Sin plataforma</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select id="estado" required>
+                    <option value="En-progreso">En Progreso</option>
+                    <option value="Terminado">Terminado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Sin-empezar">Sin Empezar</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="format">Formato</label>
+                <select id="format" required>
+                    <option value="Serie">Serie</option>
+                    <option value="Pelicula">Película</option>
+                    <option value="Libro">Libro</option>
+                    <option value="Manga">Manga</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="fecha">Fecha de Terminación</label>
+                <input type="date" id="fecha" required>
+            </div>
+            
+            <div class="form-group rating">
+                <label>Valoración Final:</label>
+                <div class="star-rating">
+                    <input type="radio" id="rating1" name="rating" value="5">
+                    <label for="rating1">&#9733;</label>
+                    
+                    <input type="radio" id="rating2" name="rating" value="4">
+                    <label for="rating2">&#9733;</label>
+                    
+                    <input type="radio" id="rating3" name="rating" value="3">
+                    <label for="rating3">&#9733;</label>
+                    
+                    <input type="radio" id="rating4" name="rating" value="2">
+                    <label for="rating4">&#9733;</label>
+                    
+                    <input type="radio" id="rating5" name="rating" value="1">
+                    <label for="rating5">&#9733;</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="review">Reseña Personal</label>
+                <textarea id="review" rows="3" required></textarea>
+            </div>
+
+            <button type="submit">Añadir Recurso</button>
+        </form>
+
+        <div id="edit-form-container" class="edit-form-container" style="display: none;">
+            <h2>Editar Recurso</h2>
+            <form id="edit-form" class="form">
+                <label for="edit-name">Nombre del Recurso:</label>
+                <input type="text" id="edit-name" name="name" required>
+            
+                <label class="title">Género:</label>
+                <div class="select-circles">
+                    <input type="checkbox" id="edit-accion" name="genero" value="Accion">
+                    <label for="edit-accion">Acción</label>
+                    <input type="checkbox" id="edit-aventura" name="genero" value="Aventura">
+                    <label for="edit-aventura">Aventura</label>
+                    <input type="checkbox" id="edit-comedia" name="genero" value="Comedia">
+                    <label for="edit-comedia">Comedia</label>
+                    <input type="checkbox" id="edit-terror" name="genero" value="Terror">
+                    <label for="edit-terror">Terror</label>
+                    <input type="checkbox" id="edit-ficcion" name="genero" value="Ficcion">
+                    <label for="edit-ficcion">Ficción</label>
+                    <input type="checkbox" id="edit-drama" name="genero" value="Drama">
+                    <label for="edit-drama">Drama</label>
+                    <input type="checkbox" id="edit-thriller" name="genero" value="Thriller">
+                    <label for="edit-thriller">Thriller</label>
+                    <input type="checkbox" id="edit-otro" name="genero" value="Otro">
+                    <label for="edit-otro">Otro</label>
+                </div>
+            
+                <label class="title">Plataforma:</label>
+                <div class="select-circles">
+                    <input type="checkbox" id="edit-netflix" name="plataforma" value="Netflix">
+                    <label for="edit-netflix">Netflix</label>
+                    <input type="checkbox" id="edit-hbo" name="plataforma" value="HBO">
+                    <label for="edit-hbo">HBO</label>
+                    <input type="checkbox" id="edit-amazon" name="plataforma" value="Amazon">
+                    <label for="edit-amazon">Amazon</label>
+                    <input type="checkbox" id="edit-otra" name="plataforma" value="Otra">
+                    <label for="edit-otra">Otra</label>
+                    <input type="checkbox" id="edit-no" name="plataforma" value="No">
+                    <label for="edit-no">Sin plataforma</label>
+                </div>
+            
+                <label for="edit-status">Estado:</label>
+                <select id="edit-status" name="status" required>
+                    <option value="En-progreso">En Progreso</option>
+                    <option value="Terminado">Terminado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Sin-empezar">Sin Empezar</option>
+                </select>
+            
+                <label for="edit-format">Formato:</label>
+                <select id="edit-format" name="format" required>
+                    <option value="Serie">Serie</option>
+                    <option value="Pelicula">Película</option>
+                    <option value="Libro">Libro</option>
+                    <option value="Manga">Manga</option>
+                </select>
+            
+                <label for="edit-date">Fecha de Terminación:</label>
+                <input type="date" id="edit-date" name="date" required>
+            
+                <label for="edit-rating">Valoración Final:</label>
+                <div class="star-rating">
+                    <input type="radio" id="edit-rating1" name="rating" value="5">
+                    <label for="edit-rating1">&#9733;</label>
+                    <input type="radio" id="edit-rating2" name="rating" value="4">
+                    <label for="edit-rating2">&#9733;</label>
+                    <input type="radio" id="edit-rating3" name="rating" value="3">
+                    <label for="edit-rating3">&#9733;</label>
+                    <input type="radio" id="edit-rating4" name="rating" value="2">
+                    <label for="edit-rating4">&#9733;</label>
+                    <input type="radio" id="edit-rating5" name="rating" value="1">
+                    <label for="edit-rating5">&#9733;</label>
+                </div>
+            
+                <label for="edit-review">Reseña Personal:</label>
+                <textarea id="edit-review" name="review" rows="3" required></textarea>
+            
+                <button type="submit">Guardar Cambios</button>
+                <button type="button" id="cancel-edit">Cancelar</button>
+            </form>
+        </div>
+
+        <div class="filters">
+            <h2>Filtrar por:</h2>
+            
+            <div class="form-group">
+                <label for="filter-genero">Género:</label>
+                <select id="filter-genero">
+                    <option value="">Todos</option>
+                    <option value="Accion">Acción</option>
+                    <option value="Aventura">Aventura</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Terror">Terror</option>
+                    <option value="Ficcion">Ficción</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="filter-plataforma">Plataforma:</label>
+                <select id="filter-plataforma">
+                    <option value="">Todas</option>
+                    <option value="Netflix">Netflix</option>
+                    <option value="HBO">HBO</option>
+                    <option value="Amazon">Amazon</option>
+                    <option value="Otra">Otra</option>
+                    <option value="No">Sin plataforma</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="filter-format">Formato:</label>
+                <select id="filter-format">
+                    <option value="">Todos</option>
+                    <option value="Serie">Serie</option>
+                    <option value="Pelicula">Película</option>
+                    <option value="Libro">Libro</option>
+                    <option value="Manga">Manga</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="filter-rating">Valoración:</label>
+                <select id="filter-rating">
+                    <option value="">Todas</option>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★</option>
+                    <option value="3">★★★</option>
+                    <option value="2">★★</option>
+                    <option value="1">★</option>
+                </select>
+            </div>
+            
+            <button id="apply-filters">Aplicar Filtros</button>
+        </div>
+        <div id="lista" class="lista"></div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
