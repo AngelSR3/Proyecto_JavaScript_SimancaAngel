@@ -5,6 +5,27 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.fondo video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 body {
     background-color: #121212;
     color: #ffffff;
@@ -52,7 +73,7 @@ textarea,
 select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ffffff;
+    border: 1px solid #00fff2;
     border-radius: 4px;
     background-color: #121212;
     color: #ffffff;
