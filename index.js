@@ -4,11 +4,9 @@ let editResourceId = null;
 // Función para obtener y mostrar los recursos
 function fetchAndDisplayResources() {
     fetch(API_URL)
-    .then(response => response.json())
-    .then(data => {
-        displayResources(data);
-    })
-    .catch(error => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => displayResources(data))
+        .catch(error => console.error('Error:', error));
 }
 
 // Manejar el envío del formulario de nuevo recurso
@@ -49,9 +47,34 @@ document.getElementById('form').addEventListener('submit', function(event) {
         document.getElementById('form').reset(); // Limpiar formulario
         fetchAndDisplayResources(); // Mostrar los recursos actualizados
     })
-    .catch((error) => {
-        console.error('Error:', error);
+    .catch((error) => console.error('Error:', error));
+});
+
+// Función para aplicar los filtros
+function applyFilters(resources) {
+    const genreFilter = document.getElementById('filter-genero').value;
+    const platformFilter = document.getElementById('filter-plataforma').value;
+    const formatFilter = document.getElementById('filter-format').value;
+    const ratingFilter = document.getElementById('filter-rating').value;
+
+    const filteredResources = resources.filter(resource => {
+        const matchesGenre = genreFilter === '' || resource.genres.includes(genreFilter);
+        const matchesPlatform = platformFilter === '' || resource.platforms.includes(platformFilter);
+        const matchesFormat = formatFilter === '' || resource.format === formatFilter;
+        const matchesRating = ratingFilter === '' || resource.rating === parseInt(ratingFilter);
+        
+        return matchesGenre && matchesPlatform && matchesFormat && matchesRating;
     });
+
+    displayResources(filteredResources);
+}
+
+// Agregar un evento al botón de aplicar filtros
+document.getElementById('apply-filters').addEventListener('click', function() {
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => applyFilters(data))
+        .catch(error => console.error('Error:', error));
 });
 
 // Función para mostrar los recursos en la lista
@@ -72,12 +95,29 @@ function displayResources(resources) {
         <p><strong>Valoración:</strong> ${'★'.repeat(resource.rating)}</p>
         <p><strong>Reseña:</strong> ${resource.review}</p>
         <button onclick='showEditForm(${JSON.stringify(resource)})'>Editar</button>
+        <button onclick='deleteResource(${resource.id})'>Eliminar</button>
         `;
         lista.appendChild(item);
     });
 }
 
-// mostrar el formulario de edición
+// Función para eliminar un recurso
+function deleteResource(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar este recurso?')) {
+        fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Recurso eliminado:', data);
+            alert('Recurso eliminado exitosamente!');
+            fetchAndDisplayResources(); // Actualizar la lista de recursos
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+// Mostrar el formulario de edición
 function showEditForm(resource) {
     document.getElementById('edit-form-container').style.display = 'block';
     document.getElementById('form').style.display = 'none';
@@ -102,10 +142,7 @@ function hideEditForm() {
 
 // Función para establecer los valores de los checkboxes
 function setCheckboxValues(prefix, values, name) {
-    // Obtener todos los checkboxes
     const checkboxes = document.querySelectorAll(`#${prefix}-form input[name="${name}"]`);
-
-    // Marcar o desmarcar los checkboxes según los valores
     checkboxes.forEach(checkbox => {
         checkbox.checked = values.includes(checkbox.value);
     });
@@ -115,7 +152,6 @@ function setCheckboxValues(prefix, values, name) {
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Recopilación de datos del formulario de edición
     const name = document.getElementById('edit-name').value;
     const genres = Array.from(document.querySelectorAll('#edit-form input[name="genero"]:checked')).map(cb => cb.value);
     const platforms = Array.from(document.querySelectorAll('#edit-form input[name="plataforma"]:checked')).map(cb => cb.value);
@@ -149,9 +185,7 @@ document.getElementById('edit-form').addEventListener('submit', function(event) 
         hideEditForm();
         fetchAndDisplayResources(); // Mostrar los recursos actualizados
     })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+    .catch(error => console.error('Error:', error));
 });
 
 // Manejar el botón de cancelar en el formulario de edición
