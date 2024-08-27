@@ -1,7 +1,7 @@
 const API_URL = 'https://66c707e9732bf1b79fa50ea9.mockapi.io/api/v1/resources';
 let editResourceId = null;
 
-// Función para obtener y mostrar los recursos
+// Funcion para obtener y mostrar los recursos
 function fetchAndDisplayResources() {
     fetch(API_URL)
         .then(response => response.json())
@@ -50,7 +50,7 @@ document.getElementById('form').addEventListener('submit', function(event) {
     .catch((error) => console.error('Error:', error));
 });
 
-// Función para aplicar los filtros
+// Funcion para aplicar los filtros
 function applyFilters(resources) {
     const genreFilter = document.getElementById('filter-genero').value;
     const platformFilter = document.getElementById('filter-plataforma').value;
@@ -69,7 +69,7 @@ function applyFilters(resources) {
     displayResources(filteredResources);
 }
 
-// Agregar un evento al botón de aplicar filtros
+// Boton de aplicar filtros
 document.getElementById('apply-filters').addEventListener('click', function() {
     fetch(API_URL)
         .then(response => response.json())
@@ -77,7 +77,7 @@ document.getElementById('apply-filters').addEventListener('click', function() {
         .catch(error => console.error('Error:', error));
 });
 
-// Función para mostrar los recursos en la lista
+// Funcion para mostrar los recursos en la lista
 function displayResources(resources) {
     const lista = document.getElementById('lista');
     lista.innerHTML = '';
@@ -101,7 +101,7 @@ function displayResources(resources) {
     });
 }
 
-// Función para eliminar un recurso
+// Funcion para eliminar un recurso
 function deleteResource(id) {
     if (confirm('¿Estás seguro de que quieres eliminar este recurso?')) {
         fetch(`${API_URL}/${id}`, {
@@ -134,13 +134,13 @@ function showEditForm(resource) {
     editResourceId = resource.id; // Guardar el ID del recurso para la edición
 }
 
-// Función para ocultar el formulario de edición
+// Funcion para ocultar el formulario de edición
 function hideEditForm() {
     document.getElementById('edit-form-container').style.display = 'none';
     document.getElementById('form').style.display = 'block';
 }
 
-// Función para establecer los valores de los checkboxes
+// Funcion para establecer los valores de los checkbox
 function setCheckboxValues(prefix, values, name) {
     const checkboxes = document.querySelectorAll(`#${prefix}-form input[name="${name}"]`);
     checkboxes.forEach(checkbox => {
@@ -148,7 +148,7 @@ function setCheckboxValues(prefix, values, name) {
     });
 }
 
-// Manejar el envío del formulario de edición
+// Envío del formulario de edición
 document.getElementById('edit-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -184,11 +184,14 @@ document.getElementById('edit-form').addEventListener('submit', function(event) 
         alert('Recurso editado exitosamente!');
         hideEditForm();
         fetchAndDisplayResources(); // Mostrar los recursos actualizados
+    
+        const addButton = document.querySelector('button[type="submit"]'); // Asegurarse de que el boton de "Añadir Recurso" sigue estando correctamente posicionado
+        addButton.style.margin = "20px auto";  // Reaplicar margen para centrar
     })
     .catch(error => console.error('Error:', error));
 });
 
-// Manejar el botón de cancelar en el formulario de edición
+// Boton de cancelar en el formulario de edición
 document.getElementById('cancel-edit').addEventListener('click', function() {
     hideEditForm();
 });
@@ -208,24 +211,4 @@ searchInput.addEventListener('input', function() {
         .catch(error => console.error('Error:', error));
 });
 
-// Función para mostrar los recursos
-function displayResources(resources) {
-    const lista = document.getElementById('lista');
-    lista.innerHTML = '';
-
-    resources.forEach(resource => {
-        const resourceElement = document.createElement('div');
-        resourceElement.classList.add('resource-item');
-        resourceElement.innerHTML = `
-            <h3>${resource.name}</h3>
-            <p>Género: ${resource.genero}</p>
-            <p>Plataforma: ${resource.plataforma}</p>
-            <p>Formato: ${resource.format}</p>
-            <p>Valoración: ${resource.rating}</p>
-        `;
-        lista.appendChild(resourceElement);
-    });
-}
-
-// Inicializa mostrando todos los recursos
 fetchAndDisplayResources();
