@@ -193,5 +193,39 @@ document.getElementById('cancel-edit').addEventListener('click', function() {
     hideEditForm();
 });
 
-// Inicializar la vista
+const searchInput = document.getElementById('search');
+
+searchInput.addEventListener('input', function() {
+    const query = searchInput.value.toLowerCase();
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            const filteredResources = data.filter(resource => 
+                resource.name.toLowerCase().includes(query)
+            );
+            displayResources(filteredResources);
+        })
+        .catch(error => console.error('Error:', error));
+});
+
+// Función para mostrar los recursos
+function displayResources(resources) {
+    const lista = document.getElementById('lista');
+    lista.innerHTML = '';
+
+    resources.forEach(resource => {
+        const resourceElement = document.createElement('div');
+        resourceElement.classList.add('resource-item');
+        resourceElement.innerHTML = `
+            <h3>${resource.name}</h3>
+            <p>Género: ${resource.genero}</p>
+            <p>Plataforma: ${resource.plataforma}</p>
+            <p>Formato: ${resource.format}</p>
+            <p>Valoración: ${resource.rating}</p>
+        `;
+        lista.appendChild(resourceElement);
+    });
+}
+
+// Inicializa mostrando todos los recursos
 fetchAndDisplayResources();

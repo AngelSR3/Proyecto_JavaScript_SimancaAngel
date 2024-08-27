@@ -222,6 +222,14 @@ button:hover {
     margin-top: 10px;
 }
 
+.search-container {
+    margin-bottom: 10px;
+}
+
+.search-container input {
+    margin-top: 10px;
+}
+
 .lista {
     margin-top: 20px;
 }
@@ -254,6 +262,6 @@ button:hover {
     padding: 10px;
     background-color: #121212;
     color: #ffffff;
-    border: 1px solid #ffffff;
+    border: 1px solid #00eeff;
     border-radius: 4px;
 }
